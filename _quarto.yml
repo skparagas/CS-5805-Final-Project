@@ -5,7 +5,7 @@ website:
   title: "CS 5805 Final Project"
   navbar:
     right:
-      - about.qmd
+      - index.qmd
       - icon: github
         href: https://github.com/skparagas/CS-5805-Final-Project
       - icon: twitter
