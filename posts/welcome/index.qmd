@@ -2,11 +2,12 @@
 title: "Clustering"
 author: "Spencer Paragas"
 date: "2023-11-28"
-categories: [code, analysis]
+categories: [cs5805final, code, analysis]
 ---
 
 This is the first post in a Quarto blog. Welcome!
 
-```{r}
+```{python}
 # What are some clustering methods?
+2+2
 ```

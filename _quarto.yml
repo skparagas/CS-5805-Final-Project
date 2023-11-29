@@ -2,7 +2,7 @@ project:
   type: website
 
 website:
-  title: "CS 5805 Final Project"
+  title: "Spencer Paragas"
   navbar:
     right:
       - text: Blog

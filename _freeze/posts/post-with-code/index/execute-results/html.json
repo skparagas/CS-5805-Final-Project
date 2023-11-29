@@ -1,7 +1,7 @@
 {
-  "hash": "524205e2ec011ea07dd8facef2dee5c6",
+  "hash": "da0a324f8a58bb2aa0fe339cd31f5baa",
   "result": {
-    "markdown": "---\ntitle: \"Post With Code\"\nauthor: \"Harlow Malloc\"\ndate: \"2023-11-26\"\ncategories: [news, code, analysis]\nimage: \"image.jpg\"\n---\n\n\nThis is a post with executable code.\n\n\n::: {.cell}\n\n```{.r .cell-code}\n1 + 1\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] 2\n```\n:::\n:::\n",
+    "markdown": "---\ntitle: \"Probability Theory and Random Variables\"\nauthor: \"Spencer Paragas\"\ndate: \"2023-11-28\"\ncategories: [cs5805final, code, analysis]\nimage: \"image.jpg\"\n---\n\n\nThis is a post with executable code.\n\n\n::: {.cell}\n\n```{.r .cell-code}\n1 + 1\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] 2\n```\n:::\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\n# What is probability theory?\nprint(\"Hello World\")\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] \"Hello World\"\n```\n:::\n:::\n",
     "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"
