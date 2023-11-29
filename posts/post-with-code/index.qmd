@@ -1,8 +1,8 @@
 ---
-title: "Post With Code"
-author: "Harlow Malloc"
-date: "2023-11-26"
-categories: [news, code, analysis]
+title: "Probability Theory and Random Variables"
+author: "Spencer Paragas"
+date: "2023-11-28"
+categories: [code, analysis]
 image: "image.jpg"
 ---
 
@@ -10,4 +10,9 @@ This is a post with executable code.
 
 ```{r}
 1 + 1
+```
+
+```{r}
+# What is probability theory?
+print("Hello World")
 ```
