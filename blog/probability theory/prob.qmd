@@ -9,9 +9,6 @@ format:
     mermaid: 
       theme: default
     output-file: index.html
-filters: 
-  - ../date.lua
-  - include-code-files
 ---
 
 This is a post with executable code.

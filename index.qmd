@@ -30,3 +30,5 @@ Add a "view source" link to every page on the website (apparently easily down th
 Can put this under execute in quarto.yml so it works for all code chunks
 
 His quarto blog post is considered too much text (should be half), too much scrolling (don't make read time too long, short and snappy)
+
+Submit the website early and he'll try to give his idea on what grade you'll get. For feedback, go to TA office hours

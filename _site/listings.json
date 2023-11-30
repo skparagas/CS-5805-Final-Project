@@ -2,8 +2,8 @@
   {
     "listing": "/blog.html",
     "items": [
-      "/posts/post-with-code/index.html",
-      "/posts/welcome/index.html"
+      "/blog/probability theory/index.html",
+      "/blog/welcome/cluster.html"
     ]
   }
 ]
