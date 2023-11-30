@@ -13,6 +13,11 @@ about:
     - icon: linkedin
       text: LinkedIn
       href: https://www.linkedin.com/in/spencer-paragas-08ab0616a
+format:
+  html:
+    output-file: index.html
+    code-tools:
+      source: "https://github.com/skparagas/CS-5805-Final-Project/blob/master/about.qmd"
 ---
 
 My name is Spencer Paragas. I am an associate analyst at Altria Client Services, as well as a graduate student in the Computer Science Masters of Engineering program at Virginia Tech. This blog is currently set up as the final project in my graduate class on machine learning. My hope, however, is that this blog will eventually turn into something beyond just this class.
