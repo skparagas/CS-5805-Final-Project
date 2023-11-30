@@ -6,7 +6,7 @@ website:
   navbar:
     right:
       - text: Blog
-        href: blog.qmd
+        href: blog/blog.qmd
       - icon: github
         href: https://github.com/skparagas/CS-5805-Final-Project
       - icon: twitter

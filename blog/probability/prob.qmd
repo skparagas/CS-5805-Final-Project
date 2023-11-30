@@ -9,6 +9,8 @@ format:
     mermaid: 
       theme: default
     output-file: index.html
+    code-tools: 
+      source: "https://github.com/skparagas/CS-5805-Final-Project/blob/master/blog/probability%20theory/prob.qmd"
 ---
 
 This is a post with executable code.

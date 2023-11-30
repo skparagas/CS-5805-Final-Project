@@ -1,8 +1,13 @@
 ---
 title: "Clustering"
 author: "Spencer Paragas"
-date: "2023-11-28"
+date: last-modified
 categories: [cs5805final, code, analysis]
+format: 
+  html: 
+    mermaid: 
+      theme: default
+    output-file: index.html
 ---
 
 This is the first post in a Quarto blog. Welcome!

@@ -2,8 +2,12 @@
   {
     "listing": "/blog.html",
     "items": [
-      "/blog/probability theory/index.html",
-      "/blog/welcome/cluster.html"
+      "/blog/probability/index.html",
+      "/blog/clustering/index.html"
     ]
+  },
+  {
+    "listing": "/blog/blog.html",
+    "items": []
   }
 ]

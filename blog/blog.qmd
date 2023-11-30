@@ -1,0 +1,19 @@
+---
+title: "CS 5805 Final Project"
+listing:
+  contents:
+    - probability/*.qmd
+    - clustering/*.qmd
+  sort: false
+  type: grid
+  categories: true
+  sort-ui: false
+  filter-ui: false
+page-layout: full
+title-block-banner: true
+format: 
+  html: 
+    output-file: index.html
+    code-tools: 
+      source: "https://github.com/skparagas/CS-5805-Final-Project/blob/master/blog/blog.qmd"
+---
