@@ -1,0 +1,30 @@
+# options specified here will apply to all posts in this folder
+
+# freeze computational output
+# (see https://quarto.org/docs/projects/code-execution.html#freeze)
+freeze: true
+cache: true
+
+# Enable banner style title blocks
+title-block-banner: false
+lightbox: true
+toc: true
+page-layout: full
+format: 
+  html: 
+    highlight-style: a11y
+    anchor-sections: true
+    tbl-cap-location: margin
+    code-block-bg: false
+    code-block-border-left: false
+    citations-hover: true
+    footnotes-hover: true
+    code-copy: true
+    code-fold: true
+    code-link: true
+    code-tools: true
+    link-external-icon: true
+    link-external-newwindow: true
+    crossref: 
+      lst-title: List
+      lst-prefix: List
