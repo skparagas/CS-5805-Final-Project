@@ -23,7 +23,7 @@ format:
       body-width: 1800px
       margin-width: 250px
 
-editor: visual
+editor: source
 
 execute:
   freeze: true
