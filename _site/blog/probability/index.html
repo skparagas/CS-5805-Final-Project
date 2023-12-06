@@ -201,12 +201,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>This is the first blog post in a series of posts for my class on machine learning at Virginia Tech. Here we will discuss probability theory, which is the foundation to the later machine learning posts in this series. While probability theory is a massive branch of mathematics that can’t be fully covered in one blog, we’ll go over topics like random variables, conditional probability, independence, and the chain rule.</p>
-<section id="the-data" class="level1">
-<h1>The Data</h1>
+<p>This is the first blog post in a series of posts for my class on machine learning at Virginia Tech. Here we will discuss probability theory, which is the foundation to the later machine learning posts in this series. While probability theory is a massive branch of mathematics that can’t be fully covered in one blog, we’ll go over topics like random variables, conditional probability, and independence.</p>
+<section id="the-data" class="level3">
+<h3 class="anchored" data-anchor-id="the-data">The Data</h3>
 <p>Before that, however, let’s introduce the dataset we’ll be using for the entirety of this blog series. The data was collected by Burn, the VT Men’s Ultimate Club. Ultimate, also known simply as frisbee, is a game that involves players trying to throw a disc between themselves with the goal of being in their team’s endzone with the disc, scoring them a point. For many of you, this game may be foreign, making some of the variables confusing. While you don’t need to know most of the context to understand the machine learning concepts shown, I’ll do my best to explain the important parts as succinctly as possible.</p>
-<p>The data represents the performance of the ultimate club at Steel City, a tournament in Pittsburgh they went to this Fall. Only data on Burn’s offense (when they had the disc) was collected. In the initial dataset, each row represents an action with the disc, either throwing it or picking it up. The features include variables like the opponents they were facing, who threw it to who, the type of throw it was, and the outcome of the throw. In total the dataset is 986 by 40, though spinoffs of the dataset will be used later on in the series.</p>
-<div class="cell" data-execution_count="1">
+<p>The data represents the performance of the ultimate club at Steel City, a tournament in Pittsburgh they went to this Fall. Only data on Burn’s offense (when they had the disc) was collected. In the initial dataset, each row represents an action with the disc, either throwing it or picking it up. The features include variables like the opponents they were facing, who threw it to who, the type of throw it was, and the outcome of the throw. In total the dataset is <span class="math inline">\(986 \times 40\)</span>, though spinoffs of the dataset will be used later on in the series.</p>
+<div class="cell" data-execution_count="2">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
@@ -377,15 +377,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="random-variables" class="level1">
-<h1>Random Variables</h1>
+<section id="random-variables" class="level3">
+<h3 class="anchored" data-anchor-id="random-variables">Random Variables</h3>
 <p>A random variable (RV) is a variable of unknown value that represents the numerical outcome of some process. This is vague, but essentially an RV can’t be known (hence it’s a variable), has to be numerical, and has to have some kind of context to it. RVs are typically represented by capitalized letters, like <span class="math inline">\(X\)</span> or <span class="math inline">\(Y\)</span>. Some examples include the number of coins that flip to head out of 2 or the height of a person. The former example is one where the RV is discrete: it can only be a distinct value like 0, 1, or 2. The latter example is one where the RV is continuous: it can be any of the infinite values within a range, like any number between 0 and 1000.</p>
 <p>The significance of random variables in the world of probability theory and, more broadly, statistics in general is that RVs have probability distributions that allow us to calculate the probabilities of RVs. This process has many applications, where people try to understand and estimate real world RVs.</p>
 </section>
-<section id="probability-distributions" class="level1">
-<h1>Probability Distributions</h1>
-<p>Let’s look at an example in the context of our ultimate data. Say we know that on any given throw, John has a 50% chance of completing the throw without turning it over to the other team. Our random variable <span class="math inline">\(X_{1}\)</span> is the number of completed throws John makes off of 1 throw. What would the resulting probability distribution look like? This one’s pretty simple, he has a 50% chance of completing the one throw, and he has a 50% chance of not completing it. Thus, the probability distribution looks like this:</p>
-<div class="cell" data-execution_count="2">
+<section id="probability-distributions" class="level3">
+<h3 class="anchored" data-anchor-id="probability-distributions">Probability Distributions</h3>
+<p>Let’s look at an example in the context of our ultimate data. Say we know that on any given throw, John has a 50% chance of completing the throw without turning it over to the other team. Our random variable <span class="math inline">\(X_{1}\)</span> is the number of completed throws John makes off of 1 throw. This is RV is discrete. What would the resulting probability distribution look like? This one’s pretty simple, he has a 50% chance of completing the one throw, and he has a 50% chance of not completing it. Thus, the probability distribution looks like this:</p>
+<div class="cell" data-execution_count="3">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
@@ -394,7 +394,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>completions <span class="op">=</span> <span class="bu">list</span>(x.keys())</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>probabilities <span class="op">=</span> <span class="bu">list</span>(x.values())</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">6</span>, <span class="dv">3</span>))</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>plt.bar(completions, probabilities, color <span class="op">=</span> <span class="st">'cornflowerblue'</span>, width <span class="op">=</span> <span class="fl">0.4</span>)</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of Completed Throws"</span>)</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Probability"</span>)</span>
@@ -403,11 +403,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<p><img src="prob_files/figure-html/cell-3-output-1.png" width="812" height="450"></p>
+<p><img src="prob_files/figure-html/cell-3-output-1.png" width="515" height="303"></p>
 </div>
 </div>
 <p>What about the probability distribution of the random variable <span class="math inline">\(X_{2}\)</span>, the number of completed throws John makes off of 2 throws? Each throw has an equal chance of being a completion or an incompletion (50%). Half of the time John will complete the first throw, and half of those times John will complete the second throw. That gives the probability of John completing 2 out of 2 throws 0.25. The same logic can give you the probability of 0 completions. Thus, the probability distribution for <span class="math inline">\(X_{2}\)</span> looks like this:</p>
-<div class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="4">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
@@ -415,7 +415,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>completions <span class="op">=</span> <span class="bu">list</span>(x.keys())</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>probabilities <span class="op">=</span> <span class="bu">list</span>(x.values())</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">6</span>, <span class="dv">3</span>))</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>plt.bar(completions, probabilities, color <span class="op">=</span> <span class="st">'cornflowerblue'</span>, width <span class="op">=</span> <span class="fl">0.4</span>)</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of Completed Throws"</span>)</span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Probability"</span>)</span>
@@ -424,24 +424,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<p><img src="prob_files/figure-html/cell-4-output-1.png" width="812" height="450"></p>
+<p><img src="prob_files/figure-html/cell-4-output-1.png" width="515" height="303"></p>
 </div>
 </div>
-<p><span class="math inline">\(X_{1}\)</span> and <span class="math inline">\(X_{2}\)</span> are examples of random variables with a binomial distribution. This distribution represent RVs that are the number of successes in an set of trials, where each trial results in one of two outcomes: success or failure. We won’t go too much into detail on the math behind it, but here’s the formula for a binomial distribution:</p>
+<p><span class="math inline">\(X_{1}\)</span> and <span class="math inline">\(X_{2}\)</span> are examples of random variables with a binomial distribution. This distribution represent RVs that are the number of successes in a set of trials, where each trial results in one of two outcomes: success or failure. We won’t go too much into detail on the math behind it, but here’s the formula for a binomial distribution:</p>
 <p><span class="math display">\[
 P(k)=\frac{n!}{k!(n-k!)}p^{k}(1-p)^{n-k}
 \]</span></p>
 <p>where <span class="math inline">\(k\)</span> is the number of successes, <span class="math inline">\(n\)</span> is the number of trials, and <span class="math inline">\(p\)</span> is the probability of success. <span class="math inline">\(P(k)\)</span> is the probability of getting <span class="math inline">\(k\)</span> successes.</p>
 </section>
-<section id="events" class="level1">
-<h1>Events</h1>
-<p>So now we know the probability distribution of John’s completions out of a set number of throws. If we had John actually go through with this experiment and we kept track of his throws and whether they were completed or not, we should get actual values to <span class="math inline">\(X_{1}\)</span> and <span class="math inline">\(X_{2}\)</span>. When we collect a value for <span class="math inline">\(X_{1}\)</span> one time, we’ll get either a completion or a turnover. This is known as an event and will be part of our sample (though right now it’s the only event in out sample). Graphing that, it won’t look like the probability distribution we laid out for <span class="math inline">\(X_{1}\)</span>. However, if we have John attempt this a large number of times, our results should resemble the probability distribution we assigned it. This describes the notion that the results of a sequence of RVs will converge towards their expectation as we gather more and more events, otherwise known as the law of large numbers. This theorem is one of the main principles of probability theory. Let’s test it out and run 1000 events, or trials, for <span class="math inline">\(X_{1}\)</span>:</p>
-<div class="cell" data-execution_count="4">
+<section id="events" class="level3">
+<h3 class="anchored" data-anchor-id="events">Events</h3>
+<p>So now we know the probability distribution of John’s completions out of a set number of throws. If we had John actually go through with this experiment and we kept track of his throws and whether they were completed or not, we should get actual values to <span class="math inline">\(X_{1}\)</span> and <span class="math inline">\(X_{2}\)</span>. When we collect a value for <span class="math inline">\(X_{1}\)</span> one time, we’ll get either a completion or a turnover. This is known as an event and will be part of our sample (though right now it’s the only event in out sample). Graphing that, it won’t look like the probability distribution we laid out for <span class="math inline">\(X_{1}\)</span>. However, if we have John attempt this a large number of times, our results should resemble the probability distribution we assigned it. This describes the notion that the results of a sequence of RVs will converge towards their expectation as we gather more and more events in our sample, otherwise known as the law of large numbers. This theorem is one of the main principles of probability theory. Let’s test it out and run 10,000 events, or trials, for <span class="math inline">\(X_{1}\)</span>:</p>
+<div class="cell" data-execution_count="5">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>n, p <span class="op">=</span> <span class="dv">1</span>, <span class="fl">0.5</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> np.random.binomial(n, p, <span class="dv">1000</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> np.random.binomial(n, p, <span class="dv">10000</span>)</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.Series(s).value_counts() <span class="op">/</span> <span class="bu">len</span>(s)</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.sort_index()</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
@@ -450,30 +450,30 @@ P(k)=\frac{n!}{k!(n-k!)}p^{k}(1-p)^{n-k}
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">6</span>, <span class="dv">3</span>))</span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>plt.bar(completions, freq, color <span class="op">=</span> <span class="st">'salmon'</span>, width <span class="op">=</span> <span class="fl">0.4</span>)</span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of Completed Throws"</span>)</span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Relative Frequency"</span>)</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"1000 Events for $X_1$"</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"10,000 Events for $X_1$"</span>)</span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>0    0.523
-1    0.477
+<pre><code>0    0.4922
+1    0.5078
 dtype: float64</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="prob_files/figure-html/cell-5-output-2.png" width="812" height="450"></p>
+<p><img src="prob_files/figure-html/cell-5-output-2.png" width="515" height="303"></p>
 </div>
 </div>
 <p>That looks pretty close to me. Let’s test out <span class="math inline">\(X_{2}\)</span> now:</p>
-<div class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="6">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>n, p <span class="op">=</span> <span class="dv">2</span>, <span class="fl">0.5</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> np.random.binomial(n, p, <span class="dv">1000</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> np.random.binomial(n, p, <span class="dv">10000</span>)</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.Series(s).value_counts() <span class="op">/</span> <span class="bu">len</span>(s)</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.sort_index()</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
@@ -482,28 +482,28 @@ dtype: float64</code></pre>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">6</span>, <span class="dv">3</span>))</span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>plt.bar(completions, freq, color <span class="op">=</span> <span class="st">'salmon'</span>, width <span class="op">=</span> <span class="fl">0.4</span>)</span>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of Completed Throws"</span>)</span>
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Relative Frequency"</span>)</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"1000 Events for $X_2$"</span>)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"10,000 Events for $X_2$"</span>)</span>
 <span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
 <span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>0    0.231
-1    0.529
-2    0.240
+<pre><code>0    0.2535
+1    0.4968
+2    0.2497
 dtype: float64</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="prob_files/figure-html/cell-6-output-2.png" width="812" height="450"></p>
+<p><img src="prob_files/figure-html/cell-6-output-2.png" width="515" height="303"></p>
 </div>
 </div>
 <p>Looks like it worked! Now that we know a little bit about random variables and their underlying probability distributions, we can further delve into the world of probabilities.</p>
 </section>
-<section id="probability-theory" class="level1">
-<h1>Probability Theory</h1>
+<section id="probability-theory" class="level3">
+<h3 class="anchored" data-anchor-id="probability-theory">Probability Theory</h3>
 <p>Probability theory is, simply put, the math behind probabilities. We’ve already worked with the three main parts of probability theory:</p>
 <ul>
 <li>random variables</li>
@@ -523,7 +523,7 @@ dtype: float64</code></pre>
 <li>Independence: <span class="math inline">\(P(A|B) = P(A)\)</span> or <span class="math inline">\(P(B|A) = P(B)\)</span></li>
 <li>Mutually exclusive: <span class="math inline">\(P(A\cap B) = 0\)</span></li>
 </ol>
-<p>Two events are independent if the occurrence of one event does not change the probability of the other event. <span class="math inline">\(P(A|B)\)</span> stands for the probability of <span class="math inline">\(A\)</span> occurring given that <span class="math inline">\(B\)</span> occurs. If that is equal to the probability of <span class="math inline">\(A\)</span>, then we can conclude that occurrence of <span class="math inline">\(B\)</span> is independent of the occurrence of <span class="math inline">\(A\)</span>. The second definition describes two events that can’t both occur. One easy example is John throwing a completion and an incompletion. He can throw either one, but he can’t throw both at the same time. <span class="math inline">\(P(A\cap B)\)</span> stands for the probability of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> both occurring. This is known as the intersection of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>. When that is equal to 0, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> will never both occur, thus making them mutually exclusive.</p>
+<p>Two events are independent if the occurrence of one event does not change the probability of the other event. <span class="math inline">\(P(A|B)\)</span> stands for the probability of <span class="math inline">\(A\)</span> occurring given that <span class="math inline">\(B\)</span> occurs. If that is equal to the probability of <span class="math inline">\(A\)</span>, then we can conclude that occurrence of <span class="math inline">\(B\)</span> is independent of the occurrence of <span class="math inline">\(A\)</span>. The second definition describes two events that can’t both occur. One easy example is John throwing a completion and an incompletion. He can throw either one, but he can’t throw both at the same time. <span class="math inline">\(P(A\cap B)\)</span> stands for the probability of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> both occurring. This is known as the intersection of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>. When that is equal to 0, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> will never both occur, thus making them mutually exclusive. Another term for this is disjoint.</p>
 <p>The above rules will be handy in the future, and we learned some important denotations along the way. Here’s two more: <span class="math inline">\(P(A\cup B\)</span> stands for the probability of <span class="math inline">\(A\)</span> and/or <span class="math inline">\(B\)</span> occurring. This is known as the union of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>. And <span class="math inline">\(P(A')\)</span> stands for the probability of <span class="math inline">\(A\)</span> not occurring. This is known as the complement of <span class="math inline">\(A\)</span>. Keeping these mind, let’s try some more complicated rules.</p>
 <ol type="1">
 <li>Addition Rule: <span class="math inline">\(P(A\cup B) = P(A) + P(B) - P(A\cap B)\)</span></li>
@@ -532,8 +532,8 @@ dtype: float64</code></pre>
 </ol>
 <p>The addition rule describes how the union of two events works. Subtracting the intersection of both events is the key. It’s necessary because by adding the individual probabilities of the two events, you are inadvertently adding the intersection twice. Note that for mutually exclusive events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, <span class="math inline">\(P(A\cap B) = 0\)</span>, making <span class="math inline">\(P(A\cup B) = P(A) + P(B)\)</span>. The multiplication rule further describes how union works. With this rule, if <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are independent, then <span class="math inline">\(P(A|B) = P(A)\)</span> and <span class="math inline">\(P(B|A) = P(B)\)</span>, making <span class="math inline">\(P(A\cup B) = P(A) * P(B)\)</span>. The final rule describes how the complement of an event works. This can be reordered to show <span class="math inline">\(P(A) + P(A') = 1\)</span>, which makes intuitive sense. The probability of an event occurring plus the probability of that event not occurring should equal 1. The event has to either occur or not occur.</p>
 </section>
-<section id="conclusion" class="level1">
-<h1>Conclusion</h1>
+<section id="conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
 <p>Hopefully you now understand the basics of probability theory, the foundation for wondrous world of machine learning. Be sure to check out the next installment of this series, and have a great day!</p>
 
 

@@ -3,7 +3,6 @@ title: "Probability Theory and Random Variables"
 author: "Spencer Paragas"
 date: last-modified
 categories: [cs5805final, code, analysis]
-image: "image.jpg"
 format: 
   html: 
     mermaid: 
@@ -13,13 +12,13 @@ format:
       source: "https://github.com/skparagas/CS-5805-Final-Project/blob/master/blog/probability/prob.qmd"
 ---
 
-This is the first blog post in a series of posts for my class on machine learning at Virginia Tech. Here we will discuss probability theory, which is the foundation to the later machine learning posts in this series. While probability theory is a massive branch of mathematics that can't be fully covered in one blog, we'll go over topics like random variables, conditional probability, independence, and the chain rule.
+This is the first blog post in a series of posts for my class on machine learning at Virginia Tech. Here we will discuss probability theory, which is the foundation to the later machine learning posts in this series. While probability theory is a massive branch of mathematics that can't be fully covered in one blog, we'll go over topics like random variables, conditional probability, and independence.
 
-# The Data
+### The Data
 
 Before that, however, let's introduce the dataset we'll be using for the entirety of this blog series. The data was collected by Burn, the VT Men's Ultimate Club. Ultimate, also known simply as frisbee, is a game that involves players trying to throw a disc between themselves with the goal of being in their team's endzone with the disc, scoring them a point. For many of you, this game may be foreign, making some of the variables confusing. While you don't need to know most of the context to understand the machine learning concepts shown, I'll do my best to explain the important parts as succinctly as possible.
 
-The data represents the performance of the ultimate club at Steel City, a tournament in Pittsburgh they went to this Fall. Only data on Burn's offense (when they had the disc) was collected. In the initial dataset, each row represents an action with the disc, either throwing it or picking it up. The features include variables like the opponents they were facing, who threw it to who, the type of throw it was, and the outcome of the throw. In total the dataset is 986 by 40, though spinoffs of the dataset will be used later on in the series.
+The data represents the performance of the ultimate club at Steel City, a tournament in Pittsburgh they went to this Fall. Only data on Burn's offense (when they had the disc) was collected. In the initial dataset, each row represents an action with the disc, either throwing it or picking it up. The features include variables like the opponents they were facing, who threw it to who, the type of throw it was, and the outcome of the throw. In total the dataset is $986 \times 40$, though spinoffs of the dataset will be used later on in the series.
 
 ```{python}
 import numpy as np
@@ -29,15 +28,15 @@ dat = dat.drop(['Unnamed: 0'], axis=1)
 dat.head()
 ```
 
-# Random Variables
+### Random Variables
 
 A random variable (RV) is a variable of unknown value that represents the numerical outcome of some process. This is vague, but essentially an RV can't be known (hence it's a variable), has to be numerical, and has to have some kind of context to it. RVs are typically represented by capitalized letters, like $X$ or $Y$. Some examples include the number of coins that flip to head out of 2 or the height of a person. The former example is one where the RV is discrete: it can only be a distinct value like 0, 1, or 2. The latter example is one where the RV is continuous: it can be any of the infinite values within a range, like any number between 0 and 1000.
 
 The significance of random variables in the world of probability theory and, more broadly, statistics in general is that RVs have probability distributions that allow us to calculate the probabilities of RVs. This process has many applications, where people try to understand and estimate real world RVs.
 
-# Probability Distributions
+### Probability Distributions
 
-Let's look at an example in the context of our ultimate data. Say we know that on any given throw, John has a 50% chance of completing the throw without turning it over to the other team. Our random variable $X_{1}$ is the number of completed throws John makes off of 1 throw. What would the resulting probability distribution look like? This one's pretty simple, he has a 50% chance of completing the one throw, and he has a 50% chance of not completing it. Thus, the probability distribution looks like this:
+Let's look at an example in the context of our ultimate data. Say we know that on any given throw, John has a 50% chance of completing the throw without turning it over to the other team. Our random variable $X_{1}$ is the number of completed throws John makes off of 1 throw. This is RV is discrete. What would the resulting probability distribution look like? This one's pretty simple, he has a 50% chance of completing the one throw, and he has a 50% chance of not completing it. Thus, the probability distribution looks like this:
 
 ```{python}
 import matplotlib.pyplot as plt
@@ -45,7 +44,7 @@ x = {'0':0.5, '1':0.5}
 completions = list(x.keys())
 probabilities = list(x.values())
 
-fig = plt.figure(figsize = (10, 5))
+fig = plt.figure(figsize = (6, 3))
 plt.bar(completions, probabilities, color = 'cornflowerblue', width = 0.4)
 plt.xlabel("Number of Completed Throws")
 plt.ylabel("Probability")
@@ -61,7 +60,7 @@ x = {'0':0.25, '1':0.5, '2':0.25}
 completions = list(x.keys())
 probabilities = list(x.values())
 
-fig = plt.figure(figsize = (10, 5))
+fig = plt.figure(figsize = (6, 3))
 plt.bar(completions, probabilities, color = 'cornflowerblue', width = 0.4)
 plt.xlabel("Number of Completed Throws")
 plt.ylabel("Probability")
@@ -69,7 +68,7 @@ plt.title("Probability Distribution for $X_2$")
 plt.show()
 ```
 
-$X_{1}$ and $X_{2}$ are examples of random variables with a binomial distribution. This distribution represent RVs that are the number of successes in an set of trials, where each trial results in one of two outcomes: success or failure. We won't go too much into detail on the math behind it, but here's the formula for a binomial distribution:
+$X_{1}$ and $X_{2}$ are examples of random variables with a binomial distribution. This distribution represent RVs that are the number of successes in a set of trials, where each trial results in one of two outcomes: success or failure. We won't go too much into detail on the math behind it, but here's the formula for a binomial distribution:
 
 $$
 P(k)=\frac{n!}{k!(n-k!)}p^{k}(1-p)^{n-k}
@@ -77,13 +76,13 @@ $$
 
 where $k$ is the number of successes, $n$ is the number of trials, and $p$ is the probability of success. $P(k)$ is the probability of getting $k$ successes.
 
-# Events
+### Events
 
-So now we know the probability distribution of John's completions out of a set number of throws. If we had John actually go through with this experiment and we kept track of his throws and whether they were completed or not, we should get actual values to $X_{1}$ and $X_{2}$. When we collect a value for $X_{1}$ one time, we'll get either a completion or a turnover. This is known as an event and will be part of our sample (though right now it's the only event in out sample). Graphing that, it won't look like the probability distribution we laid out for $X_{1}$. However, if we have John attempt this a large number of times, our results should resemble the probability distribution we assigned it. This describes the notion that the results of a sequence of RVs will converge towards their expectation as we gather more and more events, otherwise known as the law of large numbers. This theorem is one of the main principles of probability theory. Let's test it out and run 1000 events, or trials, for $X_{1}$:
+So now we know the probability distribution of John's completions out of a set number of throws. If we had John actually go through with this experiment and we kept track of his throws and whether they were completed or not, we should get actual values to $X_{1}$ and $X_{2}$. When we collect a value for $X_{1}$ one time, we'll get either a completion or a turnover. This is known as an event and will be part of our sample (though right now it's the only event in out sample). Graphing that, it won't look like the probability distribution we laid out for $X_{1}$. However, if we have John attempt this a large number of times, our results should resemble the probability distribution we assigned it. This describes the notion that the results of a sequence of RVs will converge towards their expectation as we gather more and more events in our sample, otherwise known as the law of large numbers. This theorem is one of the main principles of probability theory. Let's test it out and run 10,000 events, or trials, for $X_{1}$:
 
 ```{python}
 n, p = 1, 0.5
-s = np.random.binomial(n, p, 1000)
+s = np.random.binomial(n, p, 10000)
 df = pd.Series(s).value_counts() / len(s)
 df = df.sort_index()
 
@@ -92,11 +91,11 @@ freq = list(df.values)
 
 print(df)
 
-fig = plt.figure(figsize = (10, 5))
+fig = plt.figure(figsize = (6, 3))
 plt.bar(completions, freq, color = 'salmon', width = 0.4)
 plt.xlabel("Number of Completed Throws")
 plt.ylabel("Relative Frequency")
-plt.title("1000 Events for $X_1$")
+plt.title("10,000 Events for $X_1$")
 plt.show()
 ```
 
@@ -104,7 +103,7 @@ That looks pretty close to me. Let's test out $X_{2}$ now:
 
 ```{python}
 n, p = 2, 0.5
-s = np.random.binomial(n, p, 1000)
+s = np.random.binomial(n, p, 10000)
 df = pd.Series(s).value_counts() / len(s)
 df = df.sort_index()
 
@@ -113,17 +112,17 @@ freq = list(df.values)
 
 print(df)
 
-fig = plt.figure(figsize = (10, 5))
+fig = plt.figure(figsize = (6, 3))
 plt.bar(completions, freq, color = 'salmon', width = 0.4)
 plt.xlabel("Number of Completed Throws")
 plt.ylabel("Relative Frequency")
-plt.title("1000 Events for $X_2$")
+plt.title("10,000 Events for $X_2$")
 plt.show()
 ```
 
 Looks like it worked! Now that we know a little bit about random variables and their underlying probability distributions, we can further delve into the world of probabilities.
 
-# Probability Theory
+### Probability Theory
 
 Probability theory is, simply put, the math behind probabilities. We've already worked with the three main parts of probability theory:
 
@@ -147,7 +146,7 @@ Probability Definitions:
 1. Independence: $P(A|B) = P(A)$ or $P(B|A) = P(B)$
 2. Mutually exclusive: $P(A\cap B) = 0$
 
-Two events are independent if the occurrence of one event does not change the probability of the other event. $P(A|B)$ stands for the probability of $A$ occurring given that $B$ occurs. If that is equal to the probability of $A$, then we can conclude that occurrence of $B$ is independent of the occurrence of $A$. The second definition describes two events that can't both occur. One easy example is John throwing a completion and an incompletion. He can throw either one, but he can't throw both at the same time. $P(A\cap B)$ stands for the probability of $A$ and $B$ both occurring. This is known as the intersection of $A$ and $B$. When that is equal to 0, $A$ and $B$ will never both occur, thus making them mutually exclusive.
+Two events are independent if the occurrence of one event does not change the probability of the other event. $P(A|B)$ stands for the probability of $A$ occurring given that $B$ occurs. If that is equal to the probability of $A$, then we can conclude that occurrence of $B$ is independent of the occurrence of $A$. The second definition describes two events that can't both occur. One easy example is John throwing a completion and an incompletion. He can throw either one, but he can't throw both at the same time. $P(A\cap B)$ stands for the probability of $A$ and $B$ both occurring. This is known as the intersection of $A$ and $B$. When that is equal to 0, $A$ and $B$ will never both occur, thus making them mutually exclusive. Another term for this is disjoint.
 
 The above rules will be handy in the future, and we learned some important denotations along the way. Here's two more: $P(A\cup B$ stands for the probability of $A$ and/or $B$ occurring. This is known as the union of $A$ and $B$. And $P(A')$ stands for the probability of $A$ not occurring. This is known as the complement of $A$. Keeping these mind, let's try some more complicated rules.
 
@@ -157,7 +156,7 @@ The above rules will be handy in the future, and we learned some important denot
 
 The addition rule describes how the union of two events works. Subtracting the intersection of both events is the key. It's necessary because by adding the individual probabilities of the two events, you are inadvertently adding the intersection twice. Note that for mutually exclusive events $A$ and $B$, $P(A\cap B) = 0$, making $P(A\cup B) = P(A) + P(B)$. The multiplication rule further describes how union works. With this rule, if $A$ and $B$ are independent, then $P(A|B) = P(A)$ and $P(B|A) = P(B)$, making $P(A\cup B) = P(A) * P(B)$. The final rule describes how the complement of an event works. This can be reordered to show $P(A) + P(A') = 1$, which makes intuitive sense. The probability of an event occurring plus the probability of that event not occurring should equal 1. The event has to either occur or not occur.
 
-# Conclusion
+### Conclusion
 
 Hopefully you now understand the basics of probability theory, the foundation for wondrous world of machine learning. Be sure to check out the next installment of this series, and have a great day!
 
