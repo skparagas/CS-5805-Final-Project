@@ -1,0 +1,39 @@
+"","Force.Break","Throw.Type","Throw.Group","Freq","EPA"
+"29","f","Dump","Reset",42,-0.023
+"30","b","Dump","Reset",3,-0.027
+"31","f","Swing","Reset",117,0.014
+"32","b","Swing","Reset",85,0.01
+"33","f","Up Line","Reset",6,0.07
+"34","b","Up Line","Reset",1,0.066
+"35","f","Under","Reset",15,0.052
+"36","b","Under","Reset",4,0.048
+"39","f","Crash","Reset",13,0.013
+"41","f","Through","Reset",2,0.052
+"42","b","Through","Reset",2,0.049
+"44","b","Over Top","Reset",2,0.073
+"45","f","Dish","Reset",26,0.034
+"47","f","Open","Reset",1,0.069
+"48","b","Open","Reset",1,0.065
+"55","f","Swing","Short",4,0.019
+"56","b","Swing","Short",3,0.015
+"57","f","Up Line","Short",26,0.075
+"58","b","Up Line","Short",4,0.071
+"59","f","Under","Short",130,0.057
+"60","b","Under","Short",40,0.053
+"63","f","Crash","Short",1,0.018
+"66","b","Through","Short",27,0.054
+"67","f","Over Top","Short",1,0.081
+"71","f","Open","Short",22,0.074
+"72","b","Open","Short",7,0.07
+"79","f","Swing","Medium",1,0.036
+"81","f","Up Line","Medium",14,0.092
+"82","b","Up Line","Medium",3,0.088
+"83","f","Under","Medium",49,0.074
+"84","b","Under","Medium",20,0.07
+"85","f","Deep","Medium",3,0.146
+"86","b","Deep","Medium",2,0.142
+"90","b","Through","Medium",5,0.071
+"92","b","Over Top","Medium",1,0.095
+"95","f","Open","Medium",3,0.091
+"109","f","Deep","Deep",22,0.32
+"110","b","Deep","Deep",1,0.316

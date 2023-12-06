@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.450">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
 <meta name="author" content="Spencer Paragas">
-<meta name="dcterms.date" content="2023-11-30">
+<meta name="dcterms.date" content="2023-12-06">
+
 <title>Spencer Paragas - Probability Theory and Random Variables</title>
 <style>
 code{white-space: pre-wrap;}
@@ -55,6 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
+
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
@@ -72,7 +76,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -91,12 +96,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><link rel="stylesheet" href="../../styles.css">
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
 </head>
+
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Spencer Paragas</span>
@@ -108,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-<li class="nav-item">
+  <li class="nav-item">
     <a class="nav-link" href="../../blog/index.html" rel="" target="">
  <span class="menu-text">Blog</span></a>
   </li>  
@@ -123,19 +139,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"></span></a>
   </li>  
 </ul>
-<div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
-    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link active" data-scroll-target="#the-data">The Data</a></li>
+  <li><a href="#random-variables" id="toc-random-variables" class="nav-link" data-scroll-target="#random-variables">Random Variables</a></li>
+  <li><a href="#probability-distributions" id="toc-probability-distributions" class="nav-link" data-scroll-target="#probability-distributions">Probability Distributions</a></li>
+  <li><a href="#events" id="toc-events" class="nav-link" data-scroll-target="#events">Events</a></li>
+  <li><a href="#probability-theory" id="toc-probability-theory" class="nav-link" data-scroll-target="#probability-theory">Probability Theory</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Probability Theory and Random Variables</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button" data-quarto-source-url="https://github.com/skparagas/CS-5805-Final-Project/blob/master/blog/probability/prob.qmd">View Source</a></li></ul></div></div>
   <div class="quarto-categories">
     <div class="quarto-category">cs5805final</div>
@@ -158,7 +191,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 30, 2023</p>
+      <p class="date">December 6, 2023</p>
     </div>
   </div>
   
@@ -166,28 +199,348 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
-</header><p>This is a post with executable code.</p>
-<div class="cell" data-hash="prob_cache/html/unnamed-chunk-2_03f73bd987b9eac2b2754338dbfa882e">
-<details><summary>Code</summary><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
-</div>
-</div>
-<div class="cell" data-hash="prob_cache/html/unnamed-chunk-4_61062d9b4face9b71144a2cd256105d6">
-<details><summary>Code</summary><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># What is probability theory?</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Hello World"</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>[1] "Hello World"</code></pre>
-</div>
-</div>
+</header>
+
+<p>This is the first blog post in a series of posts for my class on machine learning at Virginia Tech. Here we will discuss probability theory, which is the foundation to the later machine learning posts in this series. While probability theory is a massive branch of mathematics that can’t be fully covered in one blog, we’ll go over topics like random variables, conditional probability, independence, and the chain rule.</p>
+<section id="the-data" class="level1">
+<h1>The Data</h1>
+<p>Before that, however, let’s introduce the dataset we’ll be using for the entirety of this blog series. The data was collected by Burn, the VT Men’s Ultimate Club. Ultimate, also known simply as frisbee, is a game that involves players trying to throw a disc between themselves with the goal of being in their team’s endzone with the disc, scoring them a point. For many of you, this game may be foreign, making some of the variables confusing. While you don’t need to know most of the context to understand the machine learning concepts shown, I’ll do my best to explain the important parts as succinctly as possible.</p>
+<p>The data represents the performance of the ultimate club at Steel City, a tournament in Pittsburgh they went to this Fall. Only data on Burn’s offense (when they had the disc) was collected. In the initial dataset, each row represents an action with the disc, either throwing it or picking it up. The features include variables like the opponents they were facing, who threw it to who, the type of throw it was, and the outcome of the throw. In total the dataset is 986 by 40, though spinoffs of the dataset will be used later on in the series.</p>
+<div class="cell" data-execution_count="1">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>dat <span class="op">=</span> pd.read_csv(<span class="st">"currDatSteelCity23.csv"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>dat <span class="op">=</span> dat.drop([<span class="st">'Unnamed: 0'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>dat.head()</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
 
 
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Opponent</th>
+<th data-quarto-table-cell-role="th">idx</th>
+<th data-quarto-table-cell-role="th">DJI.ID</th>
+<th data-quarto-table-cell-role="th">Full.ID</th>
+<th data-quarto-table-cell-role="th">Game.ID</th>
+<th data-quarto-table-cell-role="th">Point.ID</th>
+<th data-quarto-table-cell-role="th">Possession.ID</th>
+<th data-quarto-table-cell-role="th">Defense.Type</th>
+<th data-quarto-table-cell-role="th">Handler</th>
+<th data-quarto-table-cell-role="th">Receiver</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">BasicEPAOpp</th>
+<th data-quarto-table-cell-role="th">TrueEPAHan</th>
+<th data-quarto-table-cell-role="th">TrueEPARec</th>
+<th data-quarto-table-cell-role="th">EPA</th>
+<th data-quarto-table-cell-role="th">OppFactor2</th>
+<th data-quarto-table-cell-role="th">EPAHan</th>
+<th data-quarto-table-cell-role="th">EPARec</th>
+<th data-quarto-table-cell-role="th">EPAHanRes</th>
+<th data-quarto-table-cell-role="th">EPAHanTot</th>
+<th data-quarto-table-cell-role="th">EPAHan2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Binghamton</td>
+<td>538</td>
+<td>472</td>
+<td>1.1.1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>Man</td>
+<td>NaN</td>
+<td>Micah</td>
+<td>...</td>
+<td>0.000</td>
+<td>0.000</td>
+<td>0.000</td>
+<td>0.000</td>
+<td>0.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0.000</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Binghamton</td>
+<td>539</td>
+<td>472</td>
+<td>1.1.1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>Man</td>
+<td>Micah</td>
+<td>John</td>
+<td>...</td>
+<td>0.018</td>
+<td>0.014</td>
+<td>0.004</td>
+<td>0.053</td>
+<td>0.0</td>
+<td>0.039</td>
+<td>0.014</td>
+<td>0.015</td>
+<td>0.054</td>
+<td>0.059</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Binghamton</td>
+<td>540</td>
+<td>472</td>
+<td>1.1.1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>Man</td>
+<td>John</td>
+<td>Dan B</td>
+<td>...</td>
+<td>0.011</td>
+<td>0.008</td>
+<td>0.002</td>
+<td>0.042</td>
+<td>0.0</td>
+<td>0.031</td>
+<td>0.011</td>
+<td>0.000</td>
+<td>0.031</td>
+<td>0.046</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Binghamton</td>
+<td>541</td>
+<td>472</td>
+<td>1.1.1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>Man</td>
+<td>Dan B</td>
+<td>Gribs</td>
+<td>...</td>
+<td>-0.249</td>
+<td>-0.249</td>
+<td>0.000</td>
+<td>-0.421</td>
+<td>0.0</td>
+<td>-0.421</td>
+<td>0.000</td>
+<td>0.000</td>
+<td>-0.421</td>
+<td>-0.421</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Binghamton</td>
+<td>542</td>
+<td>472</td>
+<td>1.1.2</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>Man</td>
+<td>NaN</td>
+<td>Micah</td>
+<td>...</td>
+<td>0.000</td>
+<td>0.000</td>
+<td>0.000</td>
+<td>0.000</td>
+<td>0.0</td>
+<td>NaN</td>
+<td>0.000</td>
+<td>0.000</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
 
-</main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+<p>5 rows × 40 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="random-variables" class="level1">
+<h1>Random Variables</h1>
+<p>A random variable (RV) is a variable of unknown value that represents the numerical outcome of some process. This is vague, but essentially an RV can’t be known (hence it’s a variable), has to be numerical, and has to have some kind of context to it. RVs are typically represented by capitalized letters, like <span class="math inline">\(X\)</span> or <span class="math inline">\(Y\)</span>. Some examples include the number of coins that flip to head out of 2 or the height of a person. The former example is one where the RV is discrete: it can only be a distinct value like 0, 1, or 2. The latter example is one where the RV is continuous: it can be any of the infinite values within a range, like any number between 0 and 1000.</p>
+<p>The significance of random variables in the world of probability theory and, more broadly, statistics in general is that RVs have probability distributions that allow us to calculate the probabilities of RVs. This process has many applications, where people try to understand and estimate real world RVs.</p>
+</section>
+<section id="probability-distributions" class="level1">
+<h1>Probability Distributions</h1>
+<p>Let’s look at an example in the context of our ultimate data. Say we know that on any given throw, John has a 50% chance of completing the throw without turning it over to the other team. Our random variable <span class="math inline">\(X_{1}\)</span> is the number of completed throws John makes off of 1 throw. What would the resulting probability distribution look like? This one’s pretty simple, he has a 50% chance of completing the one throw, and he has a 50% chance of not completing it. Thus, the probability distribution looks like this:</p>
+<div class="cell" data-execution_count="2">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> {<span class="st">'0'</span>:<span class="fl">0.5</span>, <span class="st">'1'</span>:<span class="fl">0.5</span>}</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>completions <span class="op">=</span> <span class="bu">list</span>(x.keys())</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>probabilities <span class="op">=</span> <span class="bu">list</span>(x.values())</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>plt.bar(completions, probabilities, color <span class="op">=</span> <span class="st">'cornflowerblue'</span>, width <span class="op">=</span> <span class="fl">0.4</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of Completed Throws"</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Probability"</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Probability Distribution for $X_1$"</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="prob_files/figure-html/cell-3-output-1.png" width="812" height="450"></p>
+</div>
+</div>
+<p>What about the probability distribution of the random variable <span class="math inline">\(X_{2}\)</span>, the number of completed throws John makes off of 2 throws? Each throw has an equal chance of being a completion or an incompletion (50%). Half of the time John will complete the first throw, and half of those times John will complete the second throw. That gives the probability of John completing 2 out of 2 throws 0.25. The same logic can give you the probability of 0 completions. Thus, the probability distribution for <span class="math inline">\(X_{2}\)</span> looks like this:</p>
+<div class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> {<span class="st">'0'</span>:<span class="fl">0.25</span>, <span class="st">'1'</span>:<span class="fl">0.5</span>, <span class="st">'2'</span>:<span class="fl">0.25</span>}</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>completions <span class="op">=</span> <span class="bu">list</span>(x.keys())</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>probabilities <span class="op">=</span> <span class="bu">list</span>(x.values())</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>plt.bar(completions, probabilities, color <span class="op">=</span> <span class="st">'cornflowerblue'</span>, width <span class="op">=</span> <span class="fl">0.4</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of Completed Throws"</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Probability"</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Probability Distribution for $X_2$"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="prob_files/figure-html/cell-4-output-1.png" width="812" height="450"></p>
+</div>
+</div>
+<p><span class="math inline">\(X_{1}\)</span> and <span class="math inline">\(X_{2}\)</span> are examples of random variables with a binomial distribution. This distribution represent RVs that are the number of successes in an set of trials, where each trial results in one of two outcomes: success or failure. We won’t go too much into detail on the math behind it, but here’s the formula for a binomial distribution:</p>
+<p><span class="math display">\[
+P(k)=\frac{n!}{k!(n-k!)}p^{k}(1-p)^{n-k}
+\]</span></p>
+<p>where <span class="math inline">\(k\)</span> is the number of successes, <span class="math inline">\(n\)</span> is the number of trials, and <span class="math inline">\(p\)</span> is the probability of success. <span class="math inline">\(P(k)\)</span> is the probability of getting <span class="math inline">\(k\)</span> successes.</p>
+</section>
+<section id="events" class="level1">
+<h1>Events</h1>
+<p>So now we know the probability distribution of John’s completions out of a set number of throws. If we had John actually go through with this experiment and we kept track of his throws and whether they were completed or not, we should get actual values to <span class="math inline">\(X_{1}\)</span> and <span class="math inline">\(X_{2}\)</span>. When we collect a value for <span class="math inline">\(X_{1}\)</span> one time, we’ll get either a completion or a turnover. This is known as an event and will be part of our sample (though right now it’s the only event in out sample). Graphing that, it won’t look like the probability distribution we laid out for <span class="math inline">\(X_{1}\)</span>. However, if we have John attempt this a large number of times, our results should resemble the probability distribution we assigned it. This describes the notion that the results of a sequence of RVs will converge towards their expectation as we gather more and more events, otherwise known as the law of large numbers. This theorem is one of the main principles of probability theory. Let’s test it out and run 1000 events, or trials, for <span class="math inline">\(X_{1}\)</span>:</p>
+<div class="cell" data-execution_count="4">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>n, p <span class="op">=</span> <span class="dv">1</span>, <span class="fl">0.5</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> np.random.binomial(n, p, <span class="dv">1000</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.Series(s).value_counts() <span class="op">/</span> <span class="bu">len</span>(s)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.sort_index()</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>completions <span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>(<span class="bu">str</span>, <span class="bu">list</span>(df.keys())))</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>freq <span class="op">=</span> <span class="bu">list</span>(df.values)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>plt.bar(completions, freq, color <span class="op">=</span> <span class="st">'salmon'</span>, width <span class="op">=</span> <span class="fl">0.4</span>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of Completed Throws"</span>)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Relative Frequency"</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"1000 Events for $X_1$"</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>0    0.523
+1    0.477
+dtype: float64</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="prob_files/figure-html/cell-5-output-2.png" width="812" height="450"></p>
+</div>
+</div>
+<p>That looks pretty close to me. Let’s test out <span class="math inline">\(X_{2}\)</span> now:</p>
+<div class="cell" data-execution_count="5">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>n, p <span class="op">=</span> <span class="dv">2</span>, <span class="fl">0.5</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> np.random.binomial(n, p, <span class="dv">1000</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.Series(s).value_counts() <span class="op">/</span> <span class="bu">len</span>(s)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.sort_index()</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>completions <span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>(<span class="bu">str</span>, <span class="bu">list</span>(df.keys())))</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>freq <span class="op">=</span> <span class="bu">list</span>(df.values)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>plt.bar(completions, freq, color <span class="op">=</span> <span class="st">'salmon'</span>, width <span class="op">=</span> <span class="fl">0.4</span>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of Completed Throws"</span>)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Relative Frequency"</span>)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"1000 Events for $X_2$"</span>)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>0    0.231
+1    0.529
+2    0.240
+dtype: float64</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="prob_files/figure-html/cell-6-output-2.png" width="812" height="450"></p>
+</div>
+</div>
+<p>Looks like it worked! Now that we know a little bit about random variables and their underlying probability distributions, we can further delve into the world of probabilities.</p>
+</section>
+<section id="probability-theory" class="level1">
+<h1>Probability Theory</h1>
+<p>Probability theory is, simply put, the math behind probabilities. We’ve already worked with the three main parts of probability theory:</p>
+<ul>
+<li>random variables</li>
+<li>probability distributions</li>
+<li>events</li>
+</ul>
+<p>Because of this, we arguably just covered probability theory, but let’s go through some of the basics of how probabilities work just for good measure.</p>
+<p>Probability Principles:</p>
+<ol type="1">
+<li><span class="math inline">\(P(x) \in [0,1]\)</span></li>
+<li><span class="math inline">\(P(\Omega) = 1\)</span></li>
+</ol>
+<p>Let’s start off with how probabilities work. The probability of <span class="math inline">\(x\)</span>, denoted by <span class="math inline">\(P(x)\)</span>, is the chance that <span class="math inline">\(x\)</span> occurs. It must be a number between and including 0 and 1. A probability of 0 means the outcome will never occur, while a probability of 1 means the outcome will always occur. <span class="math inline">\(\Omega\)</span> denotes our sample space, or all the possible outcomes of the given event. The probability of one of these outcomes occurring is 1, as no other outcome can occur (otherwise it would be in the sample space).</p>
+<p>The above was pretty intuitive, but it’s important to understand those concepts well. Now, let’s go over some useful definitions.</p>
+<p>Probability Definitions:</p>
+<ol type="1">
+<li>Independence: <span class="math inline">\(P(A|B) = P(A)\)</span> or <span class="math inline">\(P(B|A) = P(B)\)</span></li>
+<li>Mutually exclusive: <span class="math inline">\(P(A\cap B) = 0\)</span></li>
+</ol>
+<p>Two events are independent if the occurrence of one event does not change the probability of the other event. <span class="math inline">\(P(A|B)\)</span> stands for the probability of <span class="math inline">\(A\)</span> occurring given that <span class="math inline">\(B\)</span> occurs. If that is equal to the probability of <span class="math inline">\(A\)</span>, then we can conclude that occurrence of <span class="math inline">\(B\)</span> is independent of the occurrence of <span class="math inline">\(A\)</span>. The second definition describes two events that can’t both occur. One easy example is John throwing a completion and an incompletion. He can throw either one, but he can’t throw both at the same time. <span class="math inline">\(P(A\cap B)\)</span> stands for the probability of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> both occurring. This is known as the intersection of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>. When that is equal to 0, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> will never both occur, thus making them mutually exclusive.</p>
+<p>The above rules will be handy in the future, and we learned some important denotations along the way. Here’s two more: <span class="math inline">\(P(A\cup B\)</span> stands for the probability of <span class="math inline">\(A\)</span> and/or <span class="math inline">\(B\)</span> occurring. This is known as the union of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>. And <span class="math inline">\(P(A')\)</span> stands for the probability of <span class="math inline">\(A\)</span> not occurring. This is known as the complement of <span class="math inline">\(A\)</span>. Keeping these mind, let’s try some more complicated rules.</p>
+<ol type="1">
+<li>Addition Rule: <span class="math inline">\(P(A\cup B) = P(A) + P(B) - P(A\cap B)\)</span></li>
+<li>Multiplication Rule: <span class="math inline">\(P(A\cup B) = P(A)\times P(B|A) = P(B)\times P(A|B)\)</span></li>
+<li>Complement Rule: <span class="math inline">\(P(A') = 1 - P(A)\)</span></li>
+</ol>
+<p>The addition rule describes how the union of two events works. Subtracting the intersection of both events is the key. It’s necessary because by adding the individual probabilities of the two events, you are inadvertently adding the intersection twice. Note that for mutually exclusive events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, <span class="math inline">\(P(A\cap B) = 0\)</span>, making <span class="math inline">\(P(A\cup B) = P(A) + P(B)\)</span>. The multiplication rule further describes how union works. With this rule, if <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are independent, then <span class="math inline">\(P(A|B) = P(A)\)</span> and <span class="math inline">\(P(B|A) = P(B)\)</span>, making <span class="math inline">\(P(A\cup B) = P(A) * P(B)\)</span>. The final rule describes how the complement of an event works. This can be reordered to show <span class="math inline">\(P(A) + P(A') = 1\)</span>, which makes intuitive sense. The probability of an event occurring plus the probability of that event not occurring should equal 1. The event has to either occur or not occur.</p>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>Hopefully you now understand the basics of probability theory, the foundation for wondrous world of machine learning. Be sure to check out the next installment of this series, and have a great day!</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
