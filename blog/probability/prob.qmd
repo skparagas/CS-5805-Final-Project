@@ -7,7 +7,6 @@ format:
   html: 
     mermaid: 
       theme: default
-    output-file: index.html
     code-tools: 
       source: "https://github.com/skparagas/CS-5805-Final-Project/blob/master/blog/probability/prob.qmd"
 ---

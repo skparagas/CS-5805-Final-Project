@@ -1,6 +1,6 @@
 ---
 title: "About"
-image: profile.jpg
+image: ProfessionalPhoto.jpg
 about:
   template: jolla
   links:
@@ -15,7 +15,6 @@ about:
       href: https://www.linkedin.com/in/spencer-paragas-08ab0616a
 format:
   html:
-    output-file: index.html
     code-tools:
       source: "https://github.com/skparagas/CS-5805-Final-Project/blob/master/about.qmd"
 ---

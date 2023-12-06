@@ -7,7 +7,6 @@ format:
   html: 
     mermaid: 
       theme: default
-    output-file: index.html
 ---
 
 This is the first post in a Quarto blog. Welcome!
