@@ -160,6 +160,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#probability-distributions" id="toc-probability-distributions" class="nav-link" data-scroll-target="#probability-distributions">Probability Distributions</a></li>
   <li><a href="#events" id="toc-events" class="nav-link" data-scroll-target="#events">Events</a></li>
   <li><a href="#probability-theory" id="toc-probability-theory" class="nav-link" data-scroll-target="#probability-theory">Probability Theory</a></li>
+  <li><a href="#machine-learning-applications" id="toc-machine-learning-applications" class="nav-link" data-scroll-target="#machine-learning-applications">Machine Learning Applications</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
@@ -206,7 +207,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="the-data">The Data</h3>
 <p>Before that, however, let’s introduce the dataset we’ll be using for the entirety of this blog series. The data was collected by Burn, the VT Men’s Ultimate Club. Ultimate, also known simply as frisbee, is a game that involves players trying to throw a disc between themselves with the goal of being in their team’s endzone with the disc, scoring them a point. For many of you, this game may be foreign, making some of the variables confusing. While you don’t need to know most of the context to understand the machine learning concepts shown, I’ll do my best to explain the important parts as succinctly as possible.</p>
 <p>The data represents the performance of the ultimate club at Steel City, a tournament in Pittsburgh they went to this Fall. Only data on Burn’s offense (when they had the disc) was collected. In the initial dataset, each row represents an action with the disc, either throwing it or picking it up. The features include variables like the opponents they were facing, who threw it to who, the type of throw it was, and the outcome of the throw. In total the dataset is <span class="math inline">\(986 \times 40\)</span>, though spinoffs of the dataset will be used later on in the series.</p>
-<div class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="1">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
@@ -217,7 +218,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>dat.head()</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="1">
+<div class="cell-output cell-output-display" data-execution_count="8">
 <div>
 
 
@@ -286,9 +287,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>Micah</td>
 <td>John</td>
 <td>...</td>
+<td>0.024</td>
 <td>0.018</td>
-<td>0.014</td>
-<td>0.004</td>
+<td>0.005</td>
 <td>0.053</td>
 <td>0.0</td>
 <td>0.039</td>
@@ -337,13 +338,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>-0.249</td>
 <td>-0.249</td>
 <td>0.000</td>
-<td>-0.421</td>
+<td>-0.420</td>
 <td>0.0</td>
-<td>-0.421</td>
+<td>-0.420</td>
 <td>0.000</td>
 <td>0.000</td>
-<td>-0.421</td>
-<td>-0.421</td>
+<td>-0.420</td>
+<td>-0.420</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
@@ -385,7 +386,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="probability-distributions" class="level3">
 <h3 class="anchored" data-anchor-id="probability-distributions">Probability Distributions</h3>
 <p>Let’s look at an example in the context of our ultimate data. Say we know that on any given throw, John has a 50% chance of completing the throw without turning it over to the other team. Our random variable <span class="math inline">\(X_{1}\)</span> is the number of completed throws John makes off of 1 throw. This is RV is discrete. What would the resulting probability distribution look like? This one’s pretty simple, he has a 50% chance of completing the one throw, and he has a 50% chance of not completing it. Thus, the probability distribution looks like this:</p>
-<div class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="2">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
@@ -407,7 +408,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>What about the probability distribution of the random variable <span class="math inline">\(X_{2}\)</span>, the number of completed throws John makes off of 2 throws? Each throw has an equal chance of being a completion or an incompletion (50%). Half of the time John will complete the first throw, and half of those times John will complete the second throw. That gives the probability of John completing 2 out of 2 throws 0.25. The same logic can give you the probability of 0 completions. Thus, the probability distribution for <span class="math inline">\(X_{2}\)</span> looks like this:</p>
-<div class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="3">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
@@ -436,7 +437,7 @@ P(k)=\frac{n!}{k!(n-k!)}p^{k}(1-p)^{n-k}
 <section id="events" class="level3">
 <h3 class="anchored" data-anchor-id="events">Events</h3>
 <p>So now we know the probability distribution of John’s completions out of a set number of throws. If we had John actually go through with this experiment and we kept track of his throws and whether they were completed or not, we should get actual values to <span class="math inline">\(X_{1}\)</span> and <span class="math inline">\(X_{2}\)</span>. When we collect a value for <span class="math inline">\(X_{1}\)</span> one time, we’ll get either a completion or a turnover. This is known as an event and will be part of our sample (though right now it’s the only event in out sample). Graphing that, it won’t look like the probability distribution we laid out for <span class="math inline">\(X_{1}\)</span>. However, if we have John attempt this a large number of times, our results should resemble the probability distribution we assigned it. This describes the notion that the results of a sequence of RVs will converge towards their expectation as we gather more and more events in our sample, otherwise known as the law of large numbers. This theorem is one of the main principles of probability theory. Let’s test it out and run 10,000 events, or trials, for <span class="math inline">\(X_{1}\)</span>:</p>
-<div class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="4">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
@@ -459,8 +460,8 @@ P(k)=\frac{n!}{k!(n-k!)}p^{k}(1-p)^{n-k}
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>0    0.4922
-1    0.5078
+<pre><code>0    0.5041
+1    0.4959
 dtype: float64</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -468,7 +469,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>That looks pretty close to me. Let’s test out <span class="math inline">\(X_{2}\)</span> now:</p>
-<div class="cell" data-execution_count="6">
+<div class="cell" data-execution_count="5">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
@@ -491,9 +492,9 @@ dtype: float64</code></pre>
 <span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>0    0.2535
-1    0.4968
-2    0.2497
+<pre><code>0    0.2444
+1    0.5023
+2    0.2533
 dtype: float64</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -531,6 +532,57 @@ dtype: float64</code></pre>
 <li>Complement Rule: <span class="math inline">\(P(A') = 1 - P(A)\)</span></li>
 </ol>
 <p>The addition rule describes how the union of two events works. Subtracting the intersection of both events is the key. It’s necessary because by adding the individual probabilities of the two events, you are inadvertently adding the intersection twice. Note that for mutually exclusive events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, <span class="math inline">\(P(A\cap B) = 0\)</span>, making <span class="math inline">\(P(A\cup B) = P(A) + P(B)\)</span>. The multiplication rule further describes how union works. With this rule, if <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are independent, then <span class="math inline">\(P(A|B) = P(A)\)</span> and <span class="math inline">\(P(B|A) = P(B)\)</span>, making <span class="math inline">\(P(A\cup B) = P(A) * P(B)\)</span>. The final rule describes how the complement of an event works. This can be reordered to show <span class="math inline">\(P(A) + P(A') = 1\)</span>, which makes intuitive sense. The probability of an event occurring plus the probability of that event not occurring should equal 1. The event has to either occur or not occur.</p>
+</section>
+<section id="machine-learning-applications" class="level3">
+<h3 class="anchored" data-anchor-id="machine-learning-applications">Machine Learning Applications</h3>
+<p>Probability theory is at the foundation of machine learning. ML algorithms typically make assumptions on the data using probability theory. These algorithms use those assumptions to make estimates and predictions on whatever unknown variable (like a random variable!) we’re focused on.</p>
+<p>Let’s go through an example. Say we are trying to estimate <span class="math inline">\(Y\)</span>, the number of throws that occur in a given possession for Burn. We want to know if <span class="math inline">\(Z\)</span>, the possession result (either a score or a turnover), is independent of <span class="math inline">\(Y\)</span>. First, let’s graph a distribution plot.</p>
+<div class="cell" data-execution_count="6">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>possession <span class="op">=</span> dat.groupby(<span class="st">'Full.ID'</span>) <span class="op">\</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                .agg(Throws<span class="op">=</span>(<span class="st">'Possession.Result'</span>, <span class="st">'size'</span>), Score<span class="op">=</span>(<span class="st">'Possession.Result'</span>, <span class="st">'mean'</span>)) <span class="op">\</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                .reset_index()</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>sns.displot(possession, x<span class="op">=</span><span class="st">"Throws"</span>, kde<span class="op">=</span><span class="va">True</span>, hue<span class="op">=</span><span class="st">"Score"</span>, stat<span class="op">=</span><span class="st">"count"</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="prob_files/figure-html/cell-7-output-1.png" width="546" height="468"></p>
+</div>
+</div>
+<p>The probability distribution of the number of throws appears to change significantly based on if the possession resulted in a score or not. Let’s try estimating this phenomenon with a ML algorithm.</p>
+<div class="cell" data-execution_count="7">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error                <span class="co"># metric for evaluating regression model</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_absolute_error               <span class="co"># metric for evaluating regression model</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score                          <span class="co"># metric for evaluating regression model</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> possession[<span class="st">'Score'</span>]</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> X.array.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> possession[<span class="st">'Throws'</span>]</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>lin_reg <span class="op">=</span> LinearRegression().fit(X, y)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> lin_reg.predict(X)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Linear Regression Results:"</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"MAE:"</span>, mean_absolute_error(y, y_pred))</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"MSE:"</span>, mean_squared_error(y, y_pred))</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"r2:"</span>, r2_score(y, y_pred))</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear Regression Results:
+MAE: 3.2052691321520363
+MSE: 16.764008697346565
+r2: 0.053219132145364445</code></pre>
+</div>
+</div>
+<p>We just used the basics of probability theory to build a machine learning model. As you can tell by its low score (just a <span class="math inline">\(r^{2}\)</span> value of 0.05), this model doesn’t run that well. Maybe that means that <span class="math inline">\(Y\)</span> and <span class="math inline">\(Z\)</span> are actually independent of each other (<span class="math inline">\(P(Y|Z) = P(Y)\)</span>) and the differences we saw were just random error. Maybe the effect <span class="math inline">\(Z\)</span> has on <span class="math inline">\(Y\)</span> is just very slight.</p>
 </section>
 <section id="conclusion" class="level3">
 <h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>

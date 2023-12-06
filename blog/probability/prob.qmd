@@ -155,6 +155,42 @@ The above rules will be handy in the future, and we learned some important denot
 
 The addition rule describes how the union of two events works. Subtracting the intersection of both events is the key. It's necessary because by adding the individual probabilities of the two events, you are inadvertently adding the intersection twice. Note that for mutually exclusive events $A$ and $B$, $P(A\cap B) = 0$, making $P(A\cup B) = P(A) + P(B)$. The multiplication rule further describes how union works. With this rule, if $A$ and $B$ are independent, then $P(A|B) = P(A)$ and $P(B|A) = P(B)$, making $P(A\cup B) = P(A) * P(B)$. The final rule describes how the complement of an event works. This can be reordered to show $P(A) + P(A') = 1$, which makes intuitive sense. The probability of an event occurring plus the probability of that event not occurring should equal 1. The event has to either occur or not occur.
 
+### Machine Learning Applications
+
+Probability theory is at the foundation of machine learning. ML algorithms typically make assumptions on the data using probability theory. These algorithms use those assumptions to make estimates and predictions on whatever unknown variable (like a random variable!) we're focused on.
+
+Let's go through an example. Say we are trying to estimate $Y$, the number of throws that occur in a given possession for Burn. We want to know if $Z$, the possession result (either a score or a turnover), is independent of $Y$. First, let's graph a distribution plot.
+
+```{python}
+import seaborn as sns
+possession = dat.groupby('Full.ID') \
+                .agg(Throws=('Possession.Result', 'size'), Score=('Possession.Result', 'mean')) \
+                .reset_index()
+sns.displot(possession, x="Throws", kde=True, hue="Score", stat="count")
+plt.show()
+```
+
+The probability distribution of the number of throws appears to change significantly based on if the possession resulted in a score or not. Let's try estimating this phenomenon with a ML algorithm.
+
+```{python}
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error                # metric for evaluating regression model
+from sklearn.metrics import mean_absolute_error               # metric for evaluating regression model
+from sklearn.metrics import r2_score                          # metric for evaluating regression model
+
+X = possession['Score']
+X = X.array.reshape(-1, 1)
+y = possession['Throws']
+lin_reg = LinearRegression().fit(X, y)
+
+y_pred = lin_reg.predict(X)
+print("Linear Regression Results:")
+print("MAE:", mean_absolute_error(y, y_pred))
+print("MSE:", mean_squared_error(y, y_pred))
+print("r2:", r2_score(y, y_pred))
+```
+We just used the basics of probability theory to build a machine learning model. As you can tell by its low score (just a $r^{2}$ value of 0.05), this model doesn't run that well. Maybe that means that $Y$ and $Z$ are actually independent of each other ($P(Y|Z) = P(Y)$) and the differences we saw were just random error. Maybe the effect $Z$ has on $Y$ is just very slight.
+
 ### Conclusion
 
 Hopefully you now understand the basics of probability theory, the foundation for wondrous world of machine learning. Be sure to check out the next installment of this series, and have a great day!
