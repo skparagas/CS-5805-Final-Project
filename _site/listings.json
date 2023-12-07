@@ -16,5 +16,9 @@
       "/blog/regression/posts/post-with-code/index.html",
       "/blog/regression/posts/welcome/index.html"
     ]
+  },
+  {
+    "listing": "/blog/classification/index.html",
+    "items": []
   }
 ]

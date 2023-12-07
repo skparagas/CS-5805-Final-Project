@@ -11,7 +11,7 @@ format:
       source: "https://github.com/skparagas/CS-5805-Final-Project/blob/master/blog/regression/reg.qmd"
 ---
 
-This is the third blog post in a series of posts for my class on machine learning at Virginia Tech. Here we will discuss regression, one of the most common techniques in machine learning that helps us understand the relationship between variables. We'll cover linear regression and a type of nonlinear regression: polynomial regression.
+This is the third blog post in a series of posts for my class on machine learning at Virginia Tech. Here we will discuss regression, one of the most common techniques in machine learning that helps us understand the relationship between variables. We'll cover linear regression and nonlinear regression, and we'll introduce the concept of overfitting.
 
 ### The Data
 
@@ -66,7 +66,7 @@ print("MAE:", mean_absolute_error(y, y_pred))
 print("MSE:", mean_squared_error(y, y_pred))
 print("r2:", r2_score(y, y_pred))
 
-plt.scatter(X, y, alpha = 0.5, c = 'tan')
+plt.scatter(X, y, alpha = 0.5, c = 'dodgerblue')
 plt.plot(X, lin_reg.coef_*X + lin_reg.intercept_, 'r', alpha = 0.8)
 plt.suptitle('Completions vs. Turnovers')
 plt.title('Simple Linear Regression', fontsize='small')
@@ -99,7 +99,7 @@ print("MAE:", mean_absolute_error(y, y_pred))
 print("MSE:", mean_squared_error(y, y_pred))
 print("r2:", r2_score(y, y_pred))
 
-plt.scatter(y, y_pred, alpha = 0.5, c = 'tan')
+plt.scatter(y, y_pred, alpha = 0.5, c = 'dodgerblue')
 plt.plot(y, y, 'r', alpha = 0.8)
 plt.suptitle('True vs. Predicted')
 plt.title('Multiple Linear Regression', fontsize='small')
@@ -140,7 +140,7 @@ print("MAE:", mean_absolute_error(y, y_pred))
 print("MSE:", mean_squared_error(y, y_pred))
 print("r2:", r2_score(y, y_pred))
 
-plt.scatter(y, y_pred, alpha = 0.5, c = 'tan')
+plt.scatter(y, y_pred, alpha = 0.5, c = 'dodgerblue')
 plt.plot(y, y, 'r', alpha = 0.8)
 plt.suptitle('True vs. Predicted')
 plt.title('Polynomial Regression - Max Degree 2', fontsize='small')
@@ -168,7 +168,7 @@ print("MAE:", mean_absolute_error(y, y_pred))
 print("MSE:", mean_squared_error(y, y_pred))
 print("r2:", r2_score(y, y_pred))
 
-plt.scatter(y, y_pred, alpha = 0.5, c = 'tan')
+plt.scatter(y, y_pred, alpha = 0.5, c = 'dodgerblue')
 plt.plot(y, y, 'r', alpha = 0.8)
 plt.suptitle('True vs. Predicted')
 plt.title('Polynomial Regression - Max Degree 4', fontsize='small')

@@ -1,0 +1,144 @@
+---
+title: "Classification"
+author: "Spencer Paragas"
+date: last-modified
+categories: [cs5805final, code, analysis]
+format: 
+  html: 
+    mermaid: 
+      theme: default
+    code-tools: 
+      source: "https://github.com/skparagas/CS-5805-Final-Project/blob/master/blog/classification/class.qmd"
+---
+
+This is the fourth blog post in a series of posts for my class on machine learning at Virginia Tech. Here we will discuss classification, one of the most common techniques in machine learning that allows us to classify data. We'll cover logistic regression and decision trees, and we'll introduce the concept of training and testing.
+
+### The Data
+
+We've already introduced the dataset we'll be using for this blog series in the previous blogs. In case you didn't read them, however, here's a quick summary.
+
+The data was collected by Burn, the VT Men's Ultimate Club. Ultimate, also known simply as frisbee, is a game that involves players trying to throw a disc between themselves with the goal of being in their team's endzone with the disc, scoring them a point. Don't worry too much about the intricacies of ultimate; the machine learning concepts should still make sense regardless.
+
+The data represents the performance of Burn's offense at a recent tournament. Each row represents an action with the disc, either throwing it or picking it up.
+
+```{python}
+import numpy as np
+import pandas as pd
+dat = pd.read_csv("currDatSteelCity23.csv")
+dat = dat.drop(['Unnamed: 0'], axis=1)
+dat.head()
+```
+
+### Classification
+
+Classification aims to classify or categorize data into predefined classes or categories. It is a type of supervised learning, meaning it requires labeled data for training (if you read my second blog on clustering, you'll recall that those were unsupervised learning algorithms). Labeled data consists of input features, or independent variables, and their corresponding class labels, or dependent variable. The goal is to build a model that can learn from labeled training data and then predict the class or category of unseen testing data.
+
+There are two main parts to the classification process:
+
+1. Training: This involves using a set of labeled data called the train set to build the model. The model learns the patterns and relationships between the input features and the classes.
+2. Testing: Once the model is trained, it is evaluated using a separate set of labeled data called the test set. The performance of the model is measured using evaluation metrics like accuracy, precision, recall, and F1 scores.
+
+These two phases are the backbone of a credible classification process (and though we didn't discuss it, they're just as important in regression too). We mentioned in the previous blog the concept of overfitting, or fitting a model so complex that it performs well on the data it's built on but not on unseen data. The use of testing data as an evaluation stage is one of the best ways to prevent overfitting.
+
+There are other important parts of classification, like data wrangling and feature selection, but we'll forego discussing those for now.
+
+### Logistic Regression
+
+There are many different types of classification models in machine learning. Here are some of the more commonly used ones:
+
+* Logistic Regression
+* Decision Trees
+* Random Forests
+* Support Vector Machines
+
+We'll start by covering the simplest of all classification models: logistic regression. Although it's called a regression model, it's purpose is more closely aligned with classification models like decision trees and SVMs. While other regression models look at the relationship between the features and some response, linear regressions using a linear function and polynomial regressions using a polynomial function, logistic regressions look at the relationship between the features and the probability of the class label using a logistic function. The logistic function is a type of sigmoid functions. These function have an S-shaped curve which is bounded at the top and bottom. My professor, Dr. Laptev, provided [the code](https://maptv.github.io/blog/prob/) to a wonderful plot of what a logistic function looks like:
+
+```{python}
+# https://github.com/ageron/handson-ml3/blob/main/04_training_linear_models.ipynb
+import matplotlib.pyplot as plt 
+lim = 6
+t = np.linspace(-lim, lim, 100)
+sig = 1 / (1 + np.exp(-t))
+
+plt.figure(figsize=(8, 3))
+plt.plot([-lim, lim], [0, 0], "k-")
+plt.plot([-lim, lim], [0.5, 0.5], "k:")
+plt.plot([-lim, lim], [1, 1], "k:")
+plt.plot([0, 0], [-1.1, 1.1], "k-")
+plt.plot(t, sig, "b-", linewidth=2, label=r"$\sigma(t) = \dfrac{1}{1 + e^{-t}}$")
+plt.xlabel("t")
+plt.legend(loc="upper left")
+plt.axis([-lim, lim, -0.1, 1.1])
+plt.gca().set_yticks([0, 0.25, 0.5, 0.75, 1])
+plt.grid()
+plt.show()
+```
+
+As you can see, the function has an upper bound of 1 and a lower bound of 0. Though they can handle multi-class classification, logistic regressions are typically used for binary classification problems. The example we'll be using it on will follow the latter. We'll use the result of each throw in our data as class to be predicted. This is a binary variable where the output is either 0 (a turnover) or 1 (a completion). We'll use variables like the opponent, the defense type, the x- and y-coordinates on the field the throw came from and went to, etc. Let's try it out
+
+```{python}
+from sklearn.preprocessing import LabelEncoder
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.metrics import ConfusionMatrixDisplay
+
+X = dat[['Opponent', 'Defense.Type', 'start.x', 'start.y', 'end.x', 'end.y', 'Force.Break', 'Throw.Type', 'Throw.Group']]
+enc = LabelEncoder()
+for col in ['Opponent', 'Defense.Type', 'start.x', 'start.y', 'end.x', 'end.y', 'Force.Break', 'Throw.Type', 'Throw.Group']:
+    X[col] = X[col].astype('str')
+    X[col] = enc.fit_transform(X[col])
+
+y = dat['Action.Result']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+log_reg = LogisticRegression()
+log_reg.fit(X_train, y_train)
+y_test_pred = log_reg.predict(X_test)
+print("Testing accuracy:", accuracy_score(y_test, y_test_pred))
+matrix = confusion_matrix(y_test, y_test_pred)
+print("Testing accuracy:", (matrix.diagonal()/matrix.sum(axis=1))[0])
+print("Testing accuracy:", (matrix.diagonal()/matrix.sum(axis=1))[1])
+print("Testing Classification Report")
+print(classification_report(y_test, y_test_pred))
+
+cmd = ConfusionMatrixDisplay.from_estimator(log_reg, X_test, y_test)
+plt.show()
+```
+
+That didn't work well! It appears as though the data is too imbalanced; there are so many more data points where the throw was completed than the throw was turned over that the model struggles.
+
+### Decision Trees
+
+Let's try a decision tree instead. A decision tree is a flowchart-like structure where each internal node represents a feature or attribute, each branch represents a decision rule based on that feature, and each leaf node represents a class label.
+
+The decision tree algorithm builds the tree recursively by partitioning the data based on different features and their values. The goal is to create a tree that can make accurate predictions by splitting the data in a way that maximizes the information gain or minimizes the impurity at each step.
+
+```{python}
+# Training the decision tree
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+from sklearn.tree import DecisionTreeClassifier
+tree_clf = DecisionTreeClassifier(criterion="entropy", random_state=42, max_depth=40)
+tree_clf.fit(X_train, y_train)
+
+# Predicting on test data
+y_test_pred = tree_clf.predict(X_test)
+matrix = confusion_matrix(y_test, y_test_pred)
+print("Testing class accuracies:", matrix.diagonal()/matrix.sum(axis=1))
+print("Testing precision:", precision_score(y_test, y_test_pred))
+print("Testing recall:", recall_score(y_test, y_test_pred))
+print("Testing f1:", f1_score(y_test, y_test_pred))
+print(classification_report(y_test, y_test_pred))
+
+cmd = ConfusionMatrixDisplay.from_estimator(tree_clf, X_test, y_test)
+plt.show()
+```
+
+The decision tree worked even worse! It looks like this class label is a tough one to predict. Even so, these classification methods will take you for in predicting categories.
+
+
+### Conclusion
+
+Hopefully you now understand the basics of classification. Be sure to check out the last installment of this series, and have a great day!
+
+
+

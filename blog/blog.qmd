@@ -4,6 +4,8 @@ listing:
     - probability/*.qmd
     - clustering/*.qmd
     - regression/*.qmd
+    - classification/*.qmd
+    - outliers/*.qmd
   sort: false
   type: grid
   categories: true

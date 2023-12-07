@@ -1,0 +1,103 @@
+---
+title: "Anomaly/Outlier Detection"
+author: "Spencer Paragas"
+date: last-modified
+categories: [cs5805final, code, analysis]
+format: 
+  html: 
+    mermaid: 
+      theme: default
+    code-tools: 
+      source: "https://github.com/skparagas/CS-5805-Final-Project/blob/master/blog/outliers/outlier.qmd"
+---
+
+This is the fifth and final blog post in a series of posts for my class on machine learning at Virginia Tech. Here we will discuss outlier detection.
+
+### The Data
+
+We've already introduced the dataset we'll be using for this blog series in the previous blogs. In case you didn't read them, however, here's a quick summary.
+
+The data was collected by Burn, the VT Men's Ultimate Club. Ultimate, also known simply as frisbee, is a game that involves players trying to throw a disc between themselves with the goal of being in their team's endzone with the disc, scoring them a point. Don't worry too much about the intricacies of ultimate; the machine learning concepts should still make sense regardless.
+
+I mentioned in my first blog that we'll be using spinoffs of the initial dataset, which contained rows of throws from Burn's offense at a recent tournament. That's going to be the case in this blog. Burn has gone through the trouble of summarizing the data for each player on their team. We'll be using this dataset for our clustering purposes.
+
+```{python}
+import numpy as np
+import pandas as pd
+dat = pd.read_csv("playDatSteelCity23.csv")
+dat = dat.drop(['Unnamed: 0'], axis=1)
+dat.head()
+```
+
+
+
+### Outlier Detection
+
+Outlier analysis and anomaly detection are techniques used in data analysis to identify and understand unusual or abnormal observations in a dataset. These techniques help in detecting data points that deviate significantly from the expected patterns and behaviors.
+
+Outliers are data points that significantly different from the majority of the data. They can be caused by various factors such as measurement errors, data corruption, or rare events.
+
+### Boxplots
+
+Boxplots are great ways of noticing outliers. Let's try out a boxplot.
+
+```{python}
+import seaborn as sns
+import matplotlib.pyplot as plt
+sns.boxplot(data=dat,x=dat["DumpThrow"])
+plt.title("Boxplot of Number of Dump Reset Throws")
+plt.show()
+```
+
+You can see from the boxplot an outlier in the data. Dump reset throws are a type of throw in ultimate that are undesirable. They are where you throw in away from the endzone you score in. It looks like one play in particular throws those types of throws a lot.
+
+
+### Isolation Forests
+
+Let's go through another outlier detection method. Isolation Forest is an unsupervised learning algorithm that isolates outliers by randomly partitioning the data into subsets. It constructs an ensemble of decision trees (go to my classification blog to learn more about those) and identifies outliers as instances that require fewer partitions to be isolated. Outliers are expected to have shorter average path lengths in the tree structure compared to normal instances.
+
+To test out this ML method, let's go back to our initial dataset.
+
+```{python}
+import numpy as np
+import pandas as pd
+dat = pd.read_csv("currDatSteelCity23.csv")
+dat = dat.drop(['Unnamed: 0'], axis=1)
+dat.head()
+```
+
+```{python}
+from sklearn.ensemble import IsolationForest
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import precision_score
+
+X = dat[['Opponent', 'Defense.Type', 'start.x', 'start.y', 'end.x', 'end.y', 'Force.Break', 'Throw.Type', 'Throw.Group']]
+enc = LabelEncoder()
+for col in ['Opponent', 'Defense.Type', 'start.x', 'start.y', 'end.x', 'end.y', 'Force.Break', 'Throw.Type', 'Throw.Group']:
+    X[col] = X[col].astype('str')
+    X[col] = enc.fit_transform(X[col])
+
+y = dat['Action.Result']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+clf = IsolationForest(random_state=0)
+clf.fit(X_train)
+y_pred = clf.predict(X_test)
+
+pred = pd.DataFrame({'pred': y_pred})
+pred['y_pred'] = np.where(pred['pred'] == -1, 1, 0)
+y_pred = pred['y_pred'] 
+print("")
+print("")
+print("Precision:", precision_score(y_test, y_pred))
+```
+
+That's a high precision! Isolation Forests are extremely powerful.
+
+### Conclusion
+
+Hopefully you now understand the basics of outlier detection. I hope you enjoyed this blog series! Have a great day!
+
+
+
