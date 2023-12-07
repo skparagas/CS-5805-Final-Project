@@ -3,6 +3,7 @@ listing:
   contents:
     - probability/*.qmd
     - clustering/*.qmd
+    - regression/*.qmd
   sort: false
   type: grid
   categories: true

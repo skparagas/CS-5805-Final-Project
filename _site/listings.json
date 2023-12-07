@@ -9,5 +9,12 @@
   {
     "listing": "/blog/blog.html",
     "items": []
+  },
+  {
+    "listing": "/blog/regression/index.html",
+    "items": [
+      "/blog/regression/posts/post-with-code/index.html",
+      "/blog/regression/posts/welcome/index.html"
+    ]
   }
 ]
