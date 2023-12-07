@@ -204,7 +204,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We’ve already introduced the dataset we’ll be using for this blog series in the previous blogs. In case you didn’t read them, however, here’s a quick summary.</p>
 <p>The data was collected by Burn, the VT Men’s Ultimate Club. Ultimate, also known simply as frisbee, is a game that involves players trying to throw a disc between themselves with the goal of being in their team’s endzone with the disc, scoring them a point. Don’t worry too much about the intricacies of ultimate; the machine learning concepts should still make sense regardless.</p>
 <p>I mentioned in my first blog that we’ll be using spinoffs of the initial dataset, which contained rows of throws from Burn’s offense at a recent tournament. That’s going to be the case in this blog. Burn has gone through the trouble of summarizing the data for each player on their team. We’ll be using this dataset for our clustering purposes.</p>
-<div class="cell" data-execution_count="1">
+<div class="cell" data-execution_count="2">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
@@ -382,8 +382,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="boxplots" class="level3">
 <h3 class="anchored" data-anchor-id="boxplots">Boxplots</h3>
-<p>Boxplots are great ways of noticing outliers. Let’s try out a boxplot</p>
-<div class="cell" data-execution_count="2">
+<p>Boxplots are great ways of noticing outliers. Let’s try out a boxplot.</p>
+<div class="cell" data-execution_count="3">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
@@ -398,12 +398,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="outlier_files/figure-html/cell-3-output-1.png" width="545" height="449"></p>
 </div>
 </div>
+<p>You can see from the boxplot an outlier in the data. Dump reset throws are a type of throw in ultimate that are undesirable. They are where you throw in away from the endzone you score in. It looks like one play in particular throws those types of throws a lot.</p>
 </section>
 <section id="isolation-forests" class="level3">
 <h3 class="anchored" data-anchor-id="isolation-forests">Isolation Forests</h3>
-<p>Isolation Forest is an unsupervised learning algorithm that isolates outliers by randomly partitioning the data into subsets. It constructs an ensemble of decision trees (go to my classification blog to learn more about those) and identifies outliers as instances that require fewer partitions to be isolated. Outliers are expected to have shorter average path lengths in the tree structure compared to normal instances.</p>
+<p>Let’s go through another outlier detection method. Isolation Forest is an unsupervised learning algorithm that isolates outliers by randomly partitioning the data into subsets. It constructs an ensemble of decision trees (go to my classification blog to learn more about those) and identifies outliers as instances that require fewer partitions to be isolated. Outliers are expected to have shorter average path lengths in the tree structure compared to normal instances.</p>
 <p>To test out this ML method, let’s go back to our initial dataset.</p>
-<div class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="4">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
@@ -573,7 +574,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="5">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
@@ -609,10 +610,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 Precision: 0.8503937007874016</code></pre>
 </div>
 </div>
+<p>That’s a high precision! Isolation Forests are extremely powerful.</p>
 </section>
 <section id="conclusion" class="level3">
 <h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
-<p>Hopefully you now understand the basics of clustering. Be sure to check out the next installment of this series, and have a great day!</p>
+<p>Hopefully you now understand the basics of outlier detection. I hope you enjoyed this blog series! Have a great day!</p>
 
 
 </section>

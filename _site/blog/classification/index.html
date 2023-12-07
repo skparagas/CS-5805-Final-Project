@@ -154,7 +154,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#the-data" id="toc-the-data" class="nav-link active" data-scroll-target="#the-data">The Data</a></li>
-  <li><a href="#classification" id="toc-classification" class="nav-link" data-scroll-target="#classification">classification</a></li>
+  <li><a href="#classification" id="toc-classification" class="nav-link" data-scroll-target="#classification">Classification</a></li>
   <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression">Logistic Regression</a></li>
   <li><a href="#decision-trees" id="toc-decision-trees" class="nav-link" data-scroll-target="#decision-trees">Decision Trees</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
@@ -204,7 +204,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We’ve already introduced the dataset we’ll be using for this blog series in the previous blogs. In case you didn’t read them, however, here’s a quick summary.</p>
 <p>The data was collected by Burn, the VT Men’s Ultimate Club. Ultimate, also known simply as frisbee, is a game that involves players trying to throw a disc between themselves with the goal of being in their team’s endzone with the disc, scoring them a point. Don’t worry too much about the intricacies of ultimate; the machine learning concepts should still make sense regardless.</p>
 <p>The data represents the performance of Burn’s offense at a recent tournament. Each row represents an action with the disc, either throwing it or picking it up.</p>
-<div class="cell" data-execution_count="1">
+<div class="cell" data-execution_count="2">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
@@ -376,7 +376,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 <section id="classification" class="level3">
-<h3 class="anchored" data-anchor-id="classification">classification</h3>
+<h3 class="anchored" data-anchor-id="classification">Classification</h3>
 <p>Classification aims to classify or categorize data into predefined classes or categories. It is a type of supervised learning, meaning it requires labeled data for training (if you read my second blog on clustering, you’ll recall that those were unsupervised learning algorithms). Labeled data consists of input features, or independent variables, and their corresponding class labels, or dependent variable. The goal is to build a model that can learn from labeled training data and then predict the class or category of unseen testing data.</p>
 <p>There are two main parts to the classification process:</p>
 <ol type="1">
@@ -396,7 +396,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Support Vector Machines</li>
 </ul>
 <p>We’ll start by covering the simplest of all classification models: logistic regression. Although it’s called a regression model, it’s purpose is more closely aligned with classification models like decision trees and SVMs. While other regression models look at the relationship between the features and some response, linear regressions using a linear function and polynomial regressions using a polynomial function, logistic regressions look at the relationship between the features and the probability of the class label using a logistic function. The logistic function is a type of sigmoid functions. These function have an S-shaped curve which is bounded at the top and bottom. My professor, Dr.&nbsp;Laptev, provided <a href="https://maptv.github.io/blog/prob/">the code</a> to a wonderful plot of what a logistic function looks like:</p>
-<div class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="3">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
@@ -425,7 +425,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>As you can see, the function has an upper bound of 1 and a lower bound of 0. Though they can handle multi-class classification, logistic regressions are typically used for binary classification problems. The example we’ll be using it on will follow the latter. We’ll use the result of each throw in our data as class to be predicted. This is a binary variable where the output is either 0 (a turnover) or 1 (a completion). We’ll use variables like the opponent, the defense type, the x- and y-coordinates on the field the throw came from and went to, etc. Let’s try it out</p>
-<div class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="4">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
@@ -482,7 +482,7 @@ weighted avg       0.84      0.88      0.84       198
 <h3 class="anchored" data-anchor-id="decision-trees">Decision Trees</h3>
 <p>Let’s try a decision tree instead. A decision tree is a flowchart-like structure where each internal node represents a feature or attribute, each branch represents a decision rule based on that feature, and each leaf node represents a class label.</p>
 <p>The decision tree algorithm builds the tree recursively by partitioning the data based on different features and their values. The goal is to create a tree that can make accurate predictions by splitting the data in a way that maximizes the information gain or minimizes the impurity at each step.</p>
-<div class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="5">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
